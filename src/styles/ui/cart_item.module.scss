@@ -1,0 +1,19 @@
+.tableRow {
+  td {
+    margin-bottom: 1rem;
+    padding: 0 10px;
+  }
+}
+.product {
+  display: flex;
+  gap: 10px;
+
+  img {
+    height: 60px;
+  }
+}
+.quantity {
+  input {
+    width: 30px;
+  }
+}

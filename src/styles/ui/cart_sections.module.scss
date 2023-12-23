@@ -1,0 +1,22 @@
+.cartSection {
+  padding: 40px 20px 0;
+  background: #f0f0f0;
+  border-radius: 27px;
+}
+.cartTable {
+}
+.totalCost {
+  background: #f51167;
+  margin: 0 -20px;
+  text-align: right;
+  padding: 22px 0;
+  padding-right: 50px;
+  border-bottom-left-radius: 27px;
+  border-bottom-right-radius: 27px;
+  h6 {
+    line-height: 1;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+  }
+}

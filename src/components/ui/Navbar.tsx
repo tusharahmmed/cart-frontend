@@ -5,6 +5,7 @@ import logo from "@/assets/images/logo.svg";
 import Link from "next/link";
 import {HiOutlineShoppingBag} from "react-icons/hi2";
 import UDrawer from "./UDrawer";
+import CartSection from "./CartSection";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -56,7 +57,7 @@ const Navbar = () => {
         </div>
       </header>
       <UDrawer title="My Cart" open={open} onClose={onClose}>
-        <h1>Welcome back</h1>
+        <CartSection />
       </UDrawer>
     </>
   );

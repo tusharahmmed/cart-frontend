@@ -10,7 +10,12 @@ type IProps = {
 
 const UDrawer = ({title, open, onClose, children}: IProps) => {
   return (
-    <Drawer title={title} placement="right" onClose={onClose} open={open}>
+    <Drawer
+      width={450}
+      title={title}
+      placement="right"
+      onClose={onClose}
+      open={open}>
       {children}
     </Drawer>
   );
