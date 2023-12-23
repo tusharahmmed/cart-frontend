@@ -1,0 +1,165 @@
+.textWraper {
+  h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #414141;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  h3 {
+    font-size: 24px;
+    color: #414141;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  h4 {
+    font-size: 12px;
+    color: #000;
+    font-weight: 700;
+    color: #414141;
+    margin-bottom: 10px;
+    span {
+      color: #f51167;
+    }
+  }
+}
+
+.sizeWraper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  p {
+    margin-right: 38px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #414141;
+    padding-top: 10px;
+    margin-bottom: 0;
+  }
+}
+.sizes {
+  display: flex;
+  gap: 5px;
+  cursor: pointer;
+}
+.radioWraper {
+  label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    width: 33px;
+    height: 33px;
+    font-size: 12px;
+    border: 2px solid #414141;
+  }
+  input {
+    visibility: hidden;
+    position: absolute;
+  }
+  input[type="radio"]:checked + label {
+    border: 2px solid #f51167;
+  }
+}
+.colorWraper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  p {
+    margin-right: 38px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #414141;
+    padding-top: 10px;
+    margin-bottom: 0;
+  }
+}
+.colors {
+  display: flex;
+  gap: 5px;
+}
+.colorInputWraper {
+  label {
+    padding: 12px;
+    box-sizing: padding-box;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    width: 33px;
+    height: 33px;
+    font-size: 12px;
+    border: 2px solid #414141;
+    box-sizing: border-box;
+    position: relative;
+
+    span {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      border-radius: 999px;
+      border: 3px solid white;
+    }
+  }
+  input {
+    visibility: hidden;
+    position: absolute;
+  }
+  input[type="radio"]:checked + label {
+    border: 2px solid #f51167;
+    span {
+      display: inline-block;
+      font-size: 20px;
+      color: aqua;
+    }
+  }
+}
+.disabled {
+  label {
+    border: 2px solid #e1e1e1;
+    color: #cacaca;
+  }
+}
+
+.quantity {
+  display: flex;
+  margin-bottom: 20px;
+  p {
+    margin-right: 38px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #414141;
+    padding-top: 10px;
+    margin-bottom: 0;
+  }
+}
+.quantityWraper {
+  input {
+    width: 94px;
+    height: 36px;
+    border: 1px solid #ddd;
+    padding: 0 15px;
+    border-radius: 40px;
+    float: left;
+  }
+}
+.shop {
+  isplay: inline-block;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  min-width: 167px;
+  padding: 18px 47px 14px;
+  border-radius: 50px;
+  text-transform: uppercase;
+  background: #f51167;
+  color: #fff;
+  line-height: normal;
+  cursor: pointer;
+  text-align: center;
+}
