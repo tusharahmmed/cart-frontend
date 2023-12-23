@@ -1,35 +1,35 @@
 import styles from "@/styles/login/login.module.scss";
 import Form from "../form/Form";
 import FormInput from "../form/FormInput";
-import {loginRequestSchema} from "@/schemas/login_request";
+
 import {yupResolver} from "@hookform/resolvers/yup";
 import {message} from "antd";
-import {useUserLoginMutation} from "@/rtk/features/api/authApi";
+import {useUserSignupMutation} from "@/rtk/features/api/authApi";
 import {useRouter} from "next/navigation";
 import {registerRequestSchema} from "@/schemas/register_request";
-// import {storeUserInfo} from "@/services/auth.service";
+import {storeUserInfo} from "@/services/auth.service";
 
 const Register = () => {
-  const [userLogin] = useUserLoginMutation();
+  const [userSignup] = useUserSignupMutation();
   const router = useRouter();
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onSubmit = async (data: any) => {
+    // console.log(data);
 
-    // message.loading("login.....");
-    // try {
-    //   const res = await userLogin({...data}).unwrap();
-    //   // console.log(res);
-    //   if (res?.accessToken) {
-    //     router.push("/profile");
-    //     message.success("User logged in successfully!");
-    //   }
-    //   // storeUserInfo({accessToken: res?.accessToken});
-    //   // console.log(res);
-    // } catch (err: any) {
-    //   console.error(err.message);
-    //   message.error(err.message);
-    // }
+    message.loading("registering.....");
+    try {
+      const res = await userSignup({...data}).unwrap();
+      console.log(res);
+      if (res?.accessToken) {
+        router.push("/");
+        message.success("sign up successfully!");
+      }
+      storeUserInfo({accessToken: res?.accessToken});
+      // console.log(res);
+    } catch (err: any) {
+      console.error(err.message);
+      message.error(err?.data?.message);
+    }
   };
 
   return (
@@ -42,7 +42,7 @@ const Register = () => {
           submitHandler={onSubmit}
           resolver={yupResolver(registerRequestSchema)}>
           <div className={styles.inputWraper}>
-            <FormInput type="text" name="name" label="Name" />
+            <FormInput type="text" name="fullName" label="Full Name" />
           </div>
           <div className={styles.inputWraper}>
             <FormInput type="email" name="email" label="Email" />

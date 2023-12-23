@@ -6,29 +6,29 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import {message} from "antd";
 import {useUserLoginMutation} from "@/rtk/features/api/authApi";
 import {useRouter} from "next/navigation";
-// import {storeUserInfo} from "@/services/auth.service";
+import {storeUserInfo} from "@/services/auth.service";
 
 const Login = () => {
   const [userLogin] = useUserLoginMutation();
   const router = useRouter();
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onSubmit = async (data: any) => {
+    // console.log(data);
 
-    // message.loading("login.....");
-    // try {
-    //   const res = await userLogin({...data}).unwrap();
-    //   // console.log(res);
-    //   if (res?.accessToken) {
-    //     router.push("/profile");
-    //     message.success("User logged in successfully!");
-    //   }
-    //   // storeUserInfo({accessToken: res?.accessToken});
-    //   // console.log(res);
-    // } catch (err: any) {
-    //   console.error(err.message);
-    //   message.error(err.message);
-    // }
+    message.loading("login.....");
+    try {
+      const res = await userLogin({...data}).unwrap();
+      console.log(res);
+      if (res?.accessToken) {
+        router.push("/");
+        message.success("User logged in successfully!");
+      }
+      storeUserInfo({accessToken: res?.accessToken});
+      // console.log(res);
+    } catch (err: any) {
+      message.error(err?.data?.message);
+      // message.error(err.message);
+    }
   };
 
   return (
