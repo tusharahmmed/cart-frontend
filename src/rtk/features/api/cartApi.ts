@@ -15,14 +15,14 @@ const cartApi = baseApi.injectEndpoints({
     }),
     getCart: builder.query({
       query: (id) => ({
-        url: `/${CART_URL}/${id}`,
+        url: `${CART_URL}/${id}`,
         method: "GET",
       }),
       providesTags: [tagTypes.cart],
     }),
     removeFromCart: builder.mutation({
       query: ({userId, data}) => ({
-        url: `/${CART_URL}/remove/${userId}`,
+        url: `${CART_URL}/remove/${userId}`,
         method: "PATCH",
         data: data,
       }),
