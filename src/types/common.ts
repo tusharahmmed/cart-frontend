@@ -21,19 +21,31 @@ export type IGenericErrorMessage = {
 };
 
 export interface IUser {
-  id: string;
-  name: string;
+  _id: string;
+  fullName: string;
   email: string;
-  contactNo: string;
-  permissions: USER_PERMISSION[];
-  address: string;
   createdAt: string;
   updatedAt: string;
 }
+export type IProduct = {
+  _id: string;
+  title: string;
+  image: string;
+  color: string;
+  size: string;
+  price: number;
+};
 
-export enum USER_PERMISSION {
-  category = "category",
-  service = "service",
-  portfolio = "portfolio",
-  order = "order",
-}
+export type IItemsList = {
+  _id: string;
+  productId: IProduct;
+  size: "sm" | "md" | "xl" | "2xl" | "3xl" | "4xl";
+  color: string;
+  quantity: number;
+};
+
+export type ICart = {
+  _id: string;
+  userId: string;
+  items: IItemsList[];
+};

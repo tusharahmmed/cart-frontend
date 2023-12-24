@@ -25,7 +25,7 @@ const DashboardHeader = () => {
     },
   ];
   //   const { role } = getUserInfo() as any;
-  const role = USER_ROLE.SUPER_ADMIN;
+  const role = USER_ROLE.ADMIN;
   return (
     <AntHeader
       style={{

@@ -1,33 +1,60 @@
-import {useForm, SubmitHandler} from "react-hook-form";
+import {useForm} from "react-hook-form";
 
 import styles from "@/styles/products/product_info.module.scss";
+import {IProduct} from "@/types";
+import {message} from "antd";
+import {getUserInfo} from "@/services/auth.service";
+import {useAddtoCartMutation} from "@/rtk/features/api/cartApi";
 
-const ProductInfo = () => {
-  const {register, handleSubmit} = useForm();
-  // const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data)
+const ProductInfo = ({data}: {data: IProduct}) => {
+  const {register, handleSubmit, reset} = useForm();
 
-  const onSubmit = async (data: any) => {
-    console.log(data);
+  const user = getUserInfo() as any;
+  const colors = data?.color.split(",");
+  const sizes = data?.size.split(",");
 
-    // message.loading("Creating.....");
-    // try {
-    //   const res = addAcademicSemester(data);
-    //   if (!!res) {
-    //     message.success("Academic Semester Created successfully");
-    //   }
-    // } catch (err: any) {
-    //   console.error(err.message);
-    //   message.error(err.message);
-    // }
+  const [addtoCart] = useAddtoCartMutation();
+
+  const onSubmit = async (formData: any) => {
+    // some validation
+    if (!formData?.items[0]?.size) {
+      message.info("Select Size to continue");
+      return;
+    }
+    if (!formData?.items[0]?.color) {
+      message.info("Select Color to continue");
+      return;
+    }
+    if (formData?.items[0]?.quantity <= 0) {
+      message.info("Quantity must be at least 1");
+      return;
+    }
+
+    // prepare body
+    formData.userId = user._id;
+    formData.items[0].productId = data?._id;
+
+    message.loading("adding to cart.....");
+    try {
+      const res: any = await addtoCart(formData);
+      if (res?.data) {
+        message.success("cart added successfully");
+      }
+      if (res?.error) {
+        message.error(res.error?.data?.message);
+        // console.log(res);
+      }
+    } catch (err: any) {
+      // console.error(err);
+      // message.error(err.message);
+    }
   };
-
-  const colors = ["#b01a1a", "#111"];
 
   return (
     <div>
       <div className={styles.textWraper}>
-        <h2>WHITE PEPLUM TOP</h2>
-        <h3>$39.90</h3>
+        <h2>{data?.title}</h2>
+        <h3>${data?.price}.00</h3>
         <h4>
           Available: <span>In Stock</span>
         </h4>
@@ -36,45 +63,30 @@ const ProductInfo = () => {
         <div className={styles.sizeWraper}>
           <p>SIZE</p>
           <div className={styles.sizes}>
-            <div className={styles.radioWraper}>
-              <input
-                type="radio"
-                value={34}
-                {...register("size")}
-                id="s-size"
-              />
-              <label htmlFor="s-size">34</label>
-            </div>
-            <div className={styles.radioWraper}>
-              <input
-                type="radio"
-                value={36}
-                {...register("size")}
-                id="m-size"
-              />
-              <label htmlFor="m-size">36</label>
-            </div>
-            <div className={`${styles.radioWraper} ${styles.disabled}`}>
-              <input
-                disabled
-                type="radio"
-                value={38}
-                {...register("size")}
-                id="z-size"
-              />
-              <label htmlFor="z-size">38</label>
-            </div>
+            {sizes?.map((size, i) => {
+              return (
+                <div key={i} className={styles.radioWraper}>
+                  <input
+                    type="radio"
+                    value={size}
+                    {...register("items[0].size")}
+                    id={size}
+                  />
+                  <label htmlFor={size}>{size}</label>
+                </div>
+              );
+            })}
           </div>
         </div>
         <div className={styles.colorWraper}>
-          <p>Colour Available</p>
+          <p>Color Available</p>
           <div className={styles.colors}>
             {colors.map((color, index) => (
-              <div className={styles.colorInputWraper}>
+              <div key={index} className={styles.colorInputWraper}>
                 <input
                   type="radio"
                   value={color}
-                  {...register("color")}
+                  {...register("items[0].color")}
                   id={color}
                 />
                 <label style={{background: color}} htmlFor={color}>
@@ -90,7 +102,7 @@ const ProductInfo = () => {
             <input
               type="number"
               defaultValue={1}
-              {...register("quantity")}
+              {...register("items[0].quantity")}
               id=""
             />
           </div>

@@ -1,4 +1,4 @@
-import {TopSelllingSection, Why4u} from "@/components/home";
+import {TopSelllingSection} from "@/components/home";
 import RootLayout from "@/layouts/RootLayout";
 
 export default function Home() {
@@ -17,7 +17,6 @@ export default function Home() {
         )`,
       }}>
       <TopSelllingSection />
-      {/* <Why4u /> */}
     </div>
   );
 }

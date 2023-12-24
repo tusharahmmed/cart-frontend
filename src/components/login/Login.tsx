@@ -18,7 +18,7 @@ const Login = () => {
     message.loading("login.....");
     try {
       const res = await userLogin({...data}).unwrap();
-      console.log(res);
+
       if (res?.accessToken) {
         router.push("/");
         message.success("User logged in successfully!");

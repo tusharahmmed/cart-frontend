@@ -5,22 +5,23 @@ import {CiShoppingCart} from "react-icons/ci";
 import {CiHeart} from "react-icons/ci";
 import Link from "next/link";
 import {useState} from "react";
+import {IProduct} from "@/types";
 
-const ProductItem = () => {
+const ProductItem = ({data}: {data: IProduct}) => {
   const [liked, setLiked] = useState(false);
 
   return (
     <div className={styles.productItem}>
       <div className={styles.piPic}>
         <Image
-          src={pic}
-          alt={"product"}
+          src={data?.image}
+          alt={data?.title}
           className="w-full"
           height={408}
           width={263}
         />
         <div className={styles.piLinks}>
-          <Link href="/products/444" className={styles.addCard}>
+          <Link href={`/products/${data?._id}`} className={styles.addCard}>
             <CiShoppingCart size={20} />
             <span>View Details</span>
           </Link>
@@ -35,8 +36,8 @@ const ProductItem = () => {
         </div>
       </div>
       <div className={styles.piText}>
-        <h6>$35,00</h6>
-        <p>Flamboyant Pink Top </p>
+        <h6>${data?.price}.00</h6>
+        <p>{data?.title}</p>
       </div>
     </div>
   );
